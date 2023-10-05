@@ -11,15 +11,24 @@ load_dotenv()
 parser = argparse.ArgumentParser(
         description="This bot is spamming emails"
 )
-#
+#parser - Сборщик флагов из терминала
 parser.add_argument(
     '--emails',
     help='файл с почтами для рассылки только в расширении .json / file with for newsletter in .json extension only',
     default='emails.json'
 )
 #
+parser.add_argument(
+    '--text',
+    help='тект для рассылки только в расширении .txt / text for newsletter in .txt extension only',
+    default='text_mail.txt'
+)
+#
+text_file = parser.parse_args().text
+#
 emails_file = parser.parse_args().emails
 #________________________________________________________________________________________________________=
+
 
 with open(emails_file, "r") as my_file:
     file_contents = my_file.read()
