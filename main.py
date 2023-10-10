@@ -37,10 +37,13 @@ text_file = parser.parse_args().text
 emails_file = parser.parse_args().emails
 #________________________________________________________________________________________________________=
 
-
-with open(emails_file, "r") as my_file:
-    file_contents = my_file.read()
-emails_to = json.loads(file_contents)
+try:
+    with open(emails_file, "r") as my_file:
+        file_contents = my_file.read()
+    emails_to = json.loads(file_contents)
+except FileNotFoundError:
+    print(f'При запуске не был найден файл "{emails_file}"')
+    exit()
 
 #________________________________________________________________________________________________________=
 
@@ -50,9 +53,13 @@ password = os.getenv("PASSWORD")
 #Work with headers/Работа с заголовками
 #________________________________________________________________________________________________________=
 
-with open("text_mail.txt", "r" , encoding="UTF-8") as my_file:
-    text = my_file.read()
-
+try:
+    with open(text_file, "r" , encoding="UTF-8") as my_file:
+        text = my_file.read()
+except FileNotFoundError:
+    print(f'При запуске не был найден файл "{text_file}"')
+    exit()
+#Обработка ошибок
 #________________________________________________________________________________________________________=
 
 email_to = input ("Кому:")
@@ -62,6 +69,7 @@ text = text.replace("%my_name%", email_from)
 website = "polus101.ru"
 text = text.replace("%website%", website)
 
+#Работа с текстом
 #________________________________________________________________________________________________________=
 
 send_mail(text, mail, password, emails_to, subject)
