@@ -24,6 +24,14 @@ parser.add_argument(
     default='text_mail.txt'
 )
 #
+parser.add_argument(
+    '--subject',
+    help='Введите текст для темы письма-рассылки / Enter the text for the subject of the newsletter email',
+    default='Реклама'
+)
+#
+subject =  parser.parse_args().subject
+#
 text_file = parser.parse_args().text
 #
 emails_file = parser.parse_args().emails
@@ -56,6 +64,6 @@ text = text.replace("%website%", website)
 
 #________________________________________________________________________________________________________=
 
-send_mail(text, mail, password, emails_to)
+send_mail(text, mail, password, emails_to, subject)
 
 #________________________________________________________________________________________________________=

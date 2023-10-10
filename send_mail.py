@@ -1,13 +1,13 @@
 import smtplib
 
-def send_mail(text, mail, password, emails_to):
+def send_mail(text, mail, password, emails_to, subject):
   server = smtplib.SMTP_SSL('smtp.yandex.ru:465')
   server.login(mail, password)
   for email in emails_to:
     heading =f"""\
-From:{mail}
+From: {mail}
 To: {email}
-Subject: Реклама
+Subject: {subject}
 Content-Type: text/plain; charset="UTF-8";
 
     """
